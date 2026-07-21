@@ -34,7 +34,7 @@ function AdminDashboardContent() {
   const [deleteModalSchool, setDeleteModalSchool] = useState<School | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  // Auth Guard
+  // Auth Guard: Redirect unauthenticated visitors to /login
   useEffect(() => {
     if (!authLoading && !user) {
       router.push('/login');
@@ -147,11 +147,14 @@ function AdminDashboardContent() {
     setSuccessMessage(`${school.name} has been permanently deleted.`);
   };
 
-  if (authLoading || loadingBackend) {
+  // If loading or unauthenticated, show loader (prevents flash of dashboard)
+  if (authLoading || loadingBackend || !user) {
     return (
       <div className="min-h-screen bg-[#15181D] flex flex-col items-center justify-center p-4 text-white">
         <Loader2 size={40} className="animate-spin text-[#FAE035] mb-4" />
-        <p className="text-sm font-semibold tracking-wide text-slate-300">Loading Admin Portal...</p>
+        <p className="text-sm font-semibold tracking-wide text-slate-300">
+          {authLoading ? 'Verifying authentication...' : !user ? 'Redirecting to login...' : 'Loading Admin Portal...'}
+        </p>
       </div>
     );
   }
