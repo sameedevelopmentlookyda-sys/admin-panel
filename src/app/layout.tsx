@@ -13,8 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LVL UP - Platform Admin Panel",
-  description: "Manage schools, coaches, and subscriptions for the LVL UP Platform.",
+  title: "LVL UP ADMIN PANEL",
+  description:
+    "Manage schools, coaches, and subscriptions for the LVL UP Platform.",
+  icons: {
+    icon: "/assets/logo.png",
+  },
 };
 
 export default function RootLayout({

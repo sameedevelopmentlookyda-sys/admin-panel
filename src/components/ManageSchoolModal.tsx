@@ -205,9 +205,6 @@ export default function ManageSchoolModal({
             <h3 className="text-xl font-extrabold text-white tracking-wide">
               Manage School – <span className="text-[#FAE035]">{school.name}</span>
             </h3>
-            <p className="text-xs text-slate-400 mt-1">
-              Update subscription dates, team status, and coach assignments.
-            </p>
           </div>
           <button
             type="button"
@@ -222,7 +219,7 @@ export default function ManageSchoolModal({
         <div className="p-6 grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* LEFT COLUMN: School Information */}
           <div className="space-y-5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-[#2D333B] pb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-[#2D333B] pb-2">
               SCHOOL INFORMATION
             </h4>
 
@@ -254,7 +251,7 @@ export default function ManageSchoolModal({
                 <button
                   type="button"
                   onClick={handleCopyCode}
-                  className="flex items-center space-x-1.5 bg-[#171B20] hover:bg-[#262A33] border border-[#2D333B] text-xs font-bold text-white px-3.5 py-2.5 rounded-lg transition cursor-pointer"
+                  className="flex items-center space-x-1.5 bg-[#171B20] hover:bg-[#262A33] border border-[#2D333B] text-xs font-normal text-white px-3.5 py-2.5 rounded-lg transition cursor-pointer"
                 >
                   {copiedCode ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
                   <span>{copiedCode ? 'Copied!' : 'Copy'}</span>
@@ -329,15 +326,15 @@ export default function ManageSchoolModal({
 
           {/* RIGHT COLUMN: Coaches */}
           <div className="space-y-5">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-[#2D333B] pb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white border-b border-[#2D333B] pb-2">
               COACHES
             </h4>
 
             {/* Head Coach Card */}
             <div className="bg-[#171B20] border border-[#2D333B] rounded-xl p-4 space-y-3 shadow-md">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <User size={18} className="text-[#FAE035]" />
+                <div className="flex items-center space-x-3">
+                  <User size={24} className="text-[#FAE035]" />
                   <div>
                     <span className="text-xs text-slate-400 block font-medium">Head Coach</span>
                     <span className="text-sm font-bold text-white">
@@ -356,7 +353,7 @@ export default function ManageSchoolModal({
                 </span>
               </div>
 
-              <p className="text-xs text-slate-400 pl-6">{headCoach?.email || 'No email attached'}</p>
+              <p className="text-xs text-slate-400 pl-9">{headCoach?.email || 'No email attached'}</p>
 
               {/* Head Coach Actions */}
               <div className="flex flex-wrap gap-2 pt-2 border-t border-[#2D333B]">
@@ -371,14 +368,14 @@ export default function ManageSchoolModal({
                     });
                     setEditEmailValue(headCoach?.email || '');
                   }}
-                  className="px-2.5 py-1 text-[11px] font-semibold bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
+                  className="px-2.5 py-1 text-[11px] font-normal bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
                 >
                   Edit Email
                 </button>
                 <button
                   type="button"
                   onClick={() => handleResendInvite('HC')}
-                  className="px-2.5 py-1 text-[11px] font-semibold bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
+                  className="px-2.5 py-1 text-[11px] font-normal bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
                 >
                   Resend Invite
                 </button>
@@ -392,14 +389,14 @@ export default function ManageSchoolModal({
                       coachEmail: headCoach?.email || '',
                     });
                   }}
-                  className="px-2.5 py-1 text-[11px] font-semibold bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
+                  className="px-2.5 py-1 text-[11px] font-normal bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
                 >
                   Replace Coach
                 </button>
                 <button
                   type="button"
                   onClick={() => handleDeactivateCoach('HC')}
-                  className="px-2.5 py-1 text-[11px] font-semibold bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded transition cursor-pointer"
+                  className="px-2.5 py-1 text-[11px] font-normal bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded transition cursor-pointer"
                 >
                   Deactivate
                 </button>
@@ -409,8 +406,8 @@ export default function ManageSchoolModal({
             {/* Strength Coach Card */}
             <div className="bg-[#171B20] border border-[#2D333B] rounded-xl p-4 space-y-3 shadow-md">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <User size={18} className="text-[#FAE035]" />
+                <div className="flex items-center space-x-3">
+                  <User size={24} className="text-[#FAE035]" />
                   <div>
                     <span className="text-xs text-slate-400 block font-medium">Strength Coach</span>
                     <span className="text-sm font-bold text-white">
@@ -429,7 +426,7 @@ export default function ManageSchoolModal({
                 </span>
               </div>
 
-              <p className="text-xs text-slate-400 pl-6">
+              <p className="text-xs text-slate-400 pl-9">
                 {strengthCoach?.email || 'No strength coach assigned yet'}
               </p>
 
@@ -448,14 +445,14 @@ export default function ManageSchoolModal({
                         });
                         setEditEmailValue(strengthCoach.email);
                       }}
-                      className="px-2.5 py-1 text-[11px] font-semibold bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
+                      className="px-2.5 py-1 text-[11px] font-normal bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
                     >
                       Edit Email
                     </button>
                     <button
                       type="button"
                       onClick={() => handleResendInvite('SC')}
-                      className="px-2.5 py-1 text-[11px] font-semibold bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
+                      className="px-2.5 py-1 text-[11px] font-normal bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
                     >
                       Resend Invite
                     </button>
@@ -469,14 +466,14 @@ export default function ManageSchoolModal({
                           coachEmail: strengthCoach.email,
                         });
                       }}
-                      className="px-2.5 py-1 text-[11px] font-semibold bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
+                      className="px-2.5 py-1 text-[11px] font-normal bg-[#2D333B] hover:bg-[#363B47] text-slate-200 rounded transition cursor-pointer"
                     >
                       Replace Coach
                     </button>
                     <button
                       type="button"
                       onClick={() => handleDeactivateCoach('SC')}
-                      className="px-2.5 py-1 text-[11px] font-semibold bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded transition cursor-pointer"
+                      className="px-2.5 py-1 text-[11px] font-normal bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded transition cursor-pointer"
                     >
                       Deactivate
                     </button>
@@ -492,7 +489,7 @@ export default function ManageSchoolModal({
                         coachEmail: '',
                       });
                     }}
-                    className="px-3 py-1 text-[11px] font-bold bg-[#FAE035] hover:bg-[#E5CD25] text-black rounded transition cursor-pointer shadow-md"
+                    className="px-3 py-1 text-[11px] font-normal bg-[#FAE035] hover:bg-[#E5CD25] text-black rounded transition cursor-pointer shadow-md"
                   >
                     + Assign Strength Coach
                   </button>
@@ -507,7 +504,7 @@ export default function ManageSchoolModal({
           <button
             type="button"
             onClick={() => onDeleteRequest(school)}
-            className="text-xs font-bold text-red-400 hover:text-red-300 transition cursor-pointer"
+            className="text-xs font-normal text-red-400 hover:text-red-300 transition cursor-pointer"
           >
             Delete School
           </button>
@@ -516,7 +513,7 @@ export default function ManageSchoolModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 text-xs font-bold text-slate-300 hover:text-white bg-[#171B20] hover:bg-[#262A33] border border-[#2D333B] rounded-lg transition cursor-pointer"
+              className="px-4 py-2.5 text-xs font-normal text-slate-300 hover:text-white bg-[#171B20] hover:bg-[#262A33] border border-[#2D333B] rounded-lg transition cursor-pointer"
             >
               Cancel
             </button>
@@ -524,7 +521,7 @@ export default function ManageSchoolModal({
               type="button"
               disabled={loading}
               onClick={handleSave}
-              className="px-6 py-2.5 text-xs font-extrabold text-black bg-[#FAE035] hover:bg-[#E5CD25] rounded-lg shadow-md hover:shadow-lg transition cursor-pointer disabled:opacity-50"
+              className="px-6 py-2.5 text-xs font-normal text-black bg-[#FAE035] hover:bg-[#E5CD25] rounded-lg shadow-md hover:shadow-lg transition cursor-pointer disabled:opacity-50"
             >
               {loading ? 'Saving...' : 'Save Changes'}
             </button>
@@ -588,14 +585,14 @@ export default function ManageSchoolModal({
               <button
                 type="button"
                 onClick={() => setActiveActionModal(null)}
-                className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white cursor-pointer"
+                className="px-4 py-2 text-xs font-normal text-slate-400 hover:text-white cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={activeActionModal.type === 'editEmail' ? executeEditEmail : executeReplaceCoach}
-                className="px-4 py-2 text-xs font-extrabold bg-[#FAE035] hover:bg-[#E5CD25] text-black rounded-lg cursor-pointer transition shadow-md"
+                className="px-4 py-2 text-xs font-normal bg-[#FAE035] hover:bg-[#E5CD25] text-black rounded-lg cursor-pointer transition shadow-md"
               >
                 Confirm
               </button>

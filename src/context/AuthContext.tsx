@@ -17,7 +17,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isAdmin: true,
-  userSchoolName: 'LVL UP Demo School',
+  userSchoolName: '',
   currentView: 'admin',
   setCurrentView: () => {},
   logout: async () => {},
@@ -27,7 +27,7 @@ const AuthContext = createContext<AuthContextType>({
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState<boolean>(true); // Default true for preview
-  const [userSchoolName, setUserSchoolName] = useState<string>('LVL UP Demo School');
+  const [userSchoolName, setUserSchoolName] = useState<string>('');
   const [currentView, setCurrentView] = useState<'admin' | 'coach'>('admin');
   const [loading, setLoading] = useState<boolean>(true);
 

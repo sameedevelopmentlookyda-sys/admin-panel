@@ -56,7 +56,7 @@ export default function Header({ onAddSchoolClick }: HeaderProps) {
             src="/assets/logo.png"
             alt="LVL UP Logo"
             className="h-14 w-auto object-contain cursor-pointer"
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/dashboard')}
           />
           <div className="h-6 w-px bg-[#2D333B]" />
           <div className="flex items-center space-x-2">
@@ -110,7 +110,7 @@ export default function Header({ onAddSchoolClick }: HeaderProps) {
                 >
                   <div>
                     <p className="font-semibold text-slate-200">Coach Portal</p>
-                    <p className="text-[11px] text-slate-400">{userSchoolName}</p>
+                    <p className="text-[11px] text-slate-400">{userSchoolName || 'Launch Coach Workspace'}</p>
                   </div>
                 </button>
               </div>
