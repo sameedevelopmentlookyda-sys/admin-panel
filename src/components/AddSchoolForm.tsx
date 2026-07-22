@@ -60,6 +60,10 @@ const AddSchoolForm = forwardRef<HTMLDivElement, AddSchoolFormProps>(
           const result = await adminApi.createTeam({
             name: formData.schoolName.trim(),
             renewalDate: nextYear.toISOString(),
+            headCoachEmail: formData.headCoachEmail.trim(),
+            headCoachFirstName: formData.headCoachFirstName.trim() || undefined,
+            headCoachLastName: formData.headCoachLastName.trim() || undefined,
+            strengthCoachEmail: formData.strengthCoachEmail?.trim() || undefined,
           });
           if (result?.teamId) {
             teamId = result.teamId;

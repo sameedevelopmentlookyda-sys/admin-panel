@@ -60,7 +60,15 @@ export const adminApi = {
     return adminFetch<{ teams: any[] }>(`/admin/teams${queryString ? `?${queryString}` : ''}`);
   },
 
-  createTeam: (payload: { name: string; timezone?: string; renewalDate?: string }) => {
+  createTeam: (payload: {
+    name: string;
+    timezone?: string;
+    renewalDate?: string;
+    headCoachEmail: string;
+    headCoachFirstName?: string;
+    headCoachLastName?: string;
+    strengthCoachEmail?: string;
+  }) => {
     return adminFetch<{ teamId: string; teamCode: string; renewalDate: string }>('/admin/teams', {
       method: 'POST',
       body: JSON.stringify({
