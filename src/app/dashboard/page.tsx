@@ -14,7 +14,7 @@ import { School, SchoolStatus } from '@/lib/types';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { adminApi } from '@/lib/apiClient';
 import { useRouter } from 'next/navigation';
-import { Loader2 } from 'lucide-react';
+import RadialSpinner from '@/components/RadialSpinner';
 
 function AdminDashboardContent() {
   const { user, loading: authLoading } = useAuth();
@@ -159,7 +159,7 @@ function AdminDashboardContent() {
   if (authLoading || loadingBackend || !user) {
     return (
       <div className="min-h-screen bg-[#15181D] flex flex-col items-center justify-center p-4 text-white">
-        <Loader2 size={40} className="animate-spin text-[#FAE035] mb-4" />
+        <RadialSpinner className="w-10 h-10 mb-4" />
         <p className="text-sm font-semibold tracking-wide text-slate-300">
           {authLoading ? 'Verifying authentication...' : !user ? 'Redirecting to login...' : 'Loading Admin Portal...'}
         </p>

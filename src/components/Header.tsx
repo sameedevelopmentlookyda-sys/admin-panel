@@ -48,7 +48,7 @@ export default function Header({ onAddSchoolClick }: HeaderProps) {
   };
 
   return (
-    <header className="bg-[#1C2128] border-b border-[#2D333B] sticky top-0 z-30 px-6 py-3 shadow-md">
+    <header className="bg-[#0f1115] border-b border-[#2D333B] sticky top-0 z-30 px-6 py-3 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left Side: Brand Logo & Section Title */}
         <div className="flex items-center space-x-4">
@@ -59,9 +59,9 @@ export default function Header({ onAddSchoolClick }: HeaderProps) {
             onClick={() => router.push('/dashboard')}
           />
           <div className="h-6 w-px bg-[#2D333B]" />
-          <div className="flex items-center space-x-2">
-            <span className="text-sm font-bold text-white tracking-wide uppercase">ADMIN PANEL</span>
-            <span className="text-xs font-semibold text-[#FAE035] bg-[#FAE035]/10 border border-[#FAE035]/30 px-2 py-0.5 rounded">
+          <div className="flex items-center space-x-3">
+            <span className="text-lg font-bold text-white tracking-wide uppercase">ADMIN PANEL</span>
+            <span className="text-xs font-semibold text-[#FAE035] tracking-wide">
               Platform Admin
             </span>
           </div>
