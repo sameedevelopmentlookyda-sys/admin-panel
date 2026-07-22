@@ -126,11 +126,28 @@ export default function ManageSchoolModal({
     alert(`Invitation email resent to ${target?.email || 'coach'} successfully!`);
   };
 
-  const handleDeactivateCoach = (type: 'HC' | 'SC') => {
+  const handleDeactivateCoach = async (type: 'HC' | 'SC') => {
+    const target = type === 'HC' ? headCoach : strengthCoach;
+    if (!target) return;
+
+    setLoading(true);
+    try {
+      if (target.id) {
+        await adminApi.disableCoach(school.id, target.id);
+      } else if (target.email) {
+        await adminApi.cancelInvite(school.id, target.email);
+      }
+    } catch (err: any) {
+      alert(`Failed to deactivate coach: ${err.message || err}`);
+      setLoading(false);
+      return;
+    }
+    setLoading(false);
+
     if (type === 'HC') {
-      if (headCoach) setHeadCoach({ ...headCoach, status: 'Pending Invite', name: 'Deactivated' });
+      setHeadCoach({ ...headCoach!, status: 'Inactive', name: 'Deactivated' });
     } else {
-      if (strengthCoach) setStrengthCoach(undefined);
+      setStrengthCoach(undefined);
     }
   };
 

@@ -108,6 +108,13 @@ export const adminApi = {
     });
   },
 
+  cancelInvite: (teamId: string, email: string) => {
+    return adminFetch<{ ok: boolean }>(`/admin/teams/${teamId}/invites/cancel`, {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
+  },
+
   replaceCoach: (teamId: string, coachUid: string, payload: { email: string; firstName?: string; lastName?: string }) => {
     return adminFetch<{ ok: boolean; inviteId: string }>(`/admin/teams/${teamId}/coaches/${coachUid}/replace`, {
       method: 'POST',
