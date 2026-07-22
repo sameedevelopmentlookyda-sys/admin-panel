@@ -29,8 +29,14 @@ export default function Header({ onAddSchoolClick }: HeaderProps) {
   const handleSelectRole = (view: 'admin' | 'coach') => {
     setDropdownOpen(false);
     if (view === 'coach') {
-      // Open / Navigate to the FlutterFlow Coach Web App URL
-      window.open('https://l-v-l-u-p-coach-qds9is.flutterflow.app/', '_blank');
+      const coachPortalUrl = process.env.NEXT_PUBLIC_COACH_PORTAL_URL;
+      if (!coachPortalUrl) {
+        console.error(
+          'CRITICAL CONFIGURATION ERROR: NEXT_PUBLIC_COACH_PORTAL_URL environment variable is missing.'
+        );
+        return;
+      }
+      window.open(coachPortalUrl, '_blank');
     } else {
       setCurrentView('admin');
     }
@@ -42,7 +48,7 @@ export default function Header({ onAddSchoolClick }: HeaderProps) {
   };
 
   return (
-    <header className="bg-[#1C2128] border-b border-[#2D333B] sticky top-0 z-30 px-6 py-3.5 shadow-md">
+    <header className="bg-[#1C2128] border-b border-[#2D333B] sticky top-0 z-30 px-6 py-3 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left Side: Brand Logo & Section Title */}
         <div className="flex items-center space-x-4">
@@ -122,16 +128,6 @@ export default function Header({ onAddSchoolClick }: HeaderProps) {
               <LogOut size={16} />
             </button>
           </div>
-
-          {/* Add New School Button */}
-          <button
-            type="button"
-            onClick={onAddSchoolClick}
-            className="flex items-center space-x-1.5 bg-[#FAE035] hover:bg-[#E5CD25] text-black font-extrabold text-xs px-4 py-2.5 rounded-lg shadow-md hover:shadow-lg transition duration-200 cursor-pointer"
-          >
-            <Plus size={16} strokeWidth={3} />
-            <span>Add New School</span>
-          </button>
         </div>
       </div>
     </header>

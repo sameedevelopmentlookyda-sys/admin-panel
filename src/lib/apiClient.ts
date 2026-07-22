@@ -102,4 +102,24 @@ export const adminApi = {
       body: JSON.stringify(payload),
     });
   },
+
+  deleteTeam: (teamId: string) => {
+    return adminFetch<{ ok: boolean }>(`/admin/teams/${teamId}`, {
+      method: 'DELETE',
+    });
+  },
+
+  updateTeamSubscription: (teamId: string, payload: { subscriptionStart?: string; renewalDate?: string }) => {
+    return adminFetch<{ ok: boolean }>(`/admin/teams/${teamId}/subscription`, {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+    });
+  },
+
+  updateCoachEmail: (coachUid: string, email: string) => {
+    return adminFetch<{ ok: boolean }>(`/admin/coaches/${coachUid}/email`, {
+      method: 'PATCH',
+      body: JSON.stringify({ email }),
+    });
+  },
 };

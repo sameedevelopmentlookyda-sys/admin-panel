@@ -75,11 +75,24 @@ export default function ManageSchoolModal({
   const handleSave = async () => {
     setLoading(true);
     try {
+      // 1. Status Update
       if (status !== school.status) {
         try {
           await adminApi.updateTeamStatus(school.id, status.toLowerCase() as any);
         } catch (err) {
           console.warn('API status update fallback:', err);
+        }
+      }
+
+      // 2. Subscription Dates Update
+      if (subscriptionStart !== school.subscriptionStart || renewalDate !== school.renewalDate) {
+        try {
+          await adminApi.updateTeamSubscription(school.id, {
+            subscriptionStart,
+            renewalDate,
+          });
+        } catch (err) {
+          console.warn('API subscription date update fallback:', err);
         }
       }
 
@@ -121,12 +134,28 @@ export default function ManageSchoolModal({
     }
   };
 
-  const executeEditEmail = () => {
+  const executeEditEmail = async () => {
     if (!activeActionModal || !editEmailValue.trim()) return;
     const newEmail = editEmailValue.trim();
     if (activeActionModal.coachType === 'HC' && headCoach) {
+      if (headCoach.id) {
+        try {
+          await adminApi.updateCoachEmail(headCoach.id, newEmail);
+        } catch (err: any) {
+          alert(`Failed to update head coach email: ${err.message || err}`);
+          return;
+        }
+      }
       setHeadCoach({ ...headCoach, email: newEmail });
     } else if (activeActionModal.coachType === 'SC' && strengthCoach) {
+      if (strengthCoach.id) {
+        try {
+          await adminApi.updateCoachEmail(strengthCoach.id, newEmail);
+        } catch (err: any) {
+          alert(`Failed to update strength coach email: ${err.message || err}`);
+          return;
+        }
+      }
       setStrengthCoach({ ...strengthCoach, email: newEmail });
     }
     setActiveActionModal(null);

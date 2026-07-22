@@ -72,6 +72,7 @@ function AdminDashboardContent() {
                 : new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
               headCoach: t.headCoach
                 ? {
+                    id: t.headCoach.uid || t.headCoach.id,
                     name: t.headCoach.name || 'Head Coach',
                     email: t.headCoach.email || '',
                     type: 'HC',
@@ -80,6 +81,7 @@ function AdminDashboardContent() {
                 : undefined,
               strengthCoach: t.strengthCoach
                 ? {
+                    id: t.strengthCoach.uid || t.strengthCoach.id,
                     name: t.strengthCoach.name || 'Strength Coach',
                     email: t.strengthCoach.email || '',
                     type: 'SC',
@@ -140,11 +142,17 @@ function AdminDashboardContent() {
   };
 
   // Handle Permanent Delete Trigger
-  const handleConfirmDelete = (school: School) => {
-    setSchools((prev) => prev.filter((s) => s.id !== school.id));
-    setDeleteModalSchool(null);
-    setSelectedManageSchool(null);
-    setSuccessMessage(`${school.name} has been permanently deleted.`);
+  const handleConfirmDelete = async (school: School) => {
+    try {
+      await adminApi.deleteTeam(school.id);
+      setSchools((prev) => prev.filter((s) => s.id !== school.id));
+      setDeleteModalSchool(null);
+      setSelectedManageSchool(null);
+      setSuccessMessage(`${school.name} has been permanently deleted.`);
+    } catch (err: any) {
+      console.error('Failed to delete school:', err);
+      alert(`Failed to delete school: ${err.message || err}`);
+    }
   };
 
   // If loading or unauthenticated, show loader (prevents flash of dashboard)

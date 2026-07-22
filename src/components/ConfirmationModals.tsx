@@ -116,17 +116,10 @@ export function DeleteConfirmationModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-[#1C2128] border border-red-500/30 rounded-2xl p-6 w-full max-w-md space-y-5 shadow-2xl">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-red-500/10 text-red-500 rounded-xl border border-red-500/20">
-              <AlertTriangle size={24} />
-            </div>
-            <div>
-              <h3 className="text-base font-bold text-white">Delete School</h3>
-              <p className="text-xs text-red-400 font-semibold">{school.name}</p>
-            </div>
-          </div>
+      <div className="bg-[#1C2128] border border-[#2D333B] rounded-2xl p-6 w-full max-w-md space-y-6 shadow-2xl relative">
+        {/* Modal Header */}
+        <div className="flex items-center justify-between pb-2 border-b border-[#2D333B]">
+          <h3 className="text-lg font-bold text-white">Delete School</h3>
           <button
             type="button"
             onClick={onClose}
@@ -136,22 +129,19 @@ export function DeleteConfirmationModal({
           </button>
         </div>
 
-        <div className="bg-red-500/5 border border-red-500/20 rounded-xl p-4 text-xs text-slate-300 space-y-2">
-          <p className="font-bold text-red-400">Warning: This action cannot be undone!</p>
-          <p className="text-[11px] leading-relaxed text-slate-400">
-            Permanent deletion removes the school and all associated data, including:
+        {/* Warning Icon & Description (Step 1 matching design) */}
+        <div className="flex flex-col items-center text-center space-y-3 my-4">
+          <AlertTriangle size={48} className="text-[#EF4444] animate-pulse" />
+          <p className="text-xs text-slate-400 font-medium">Are you sure you want to permanently delete</p>
+          <h4 className="text-base font-extrabold text-white px-2 leading-snug">{school.name}?</h4>
+          <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+            This action cannot be undone. All data will be permanently deleted including athletes, tests, results, and settings.
           </p>
-          <ul className="list-disc pl-4 text-[11px] text-slate-400 space-y-0.5">
-            <li>Coach access & accounts</li>
-            <li>Athlete profiles & rosters</li>
-            <li>Testing sessions, raw results & ratings</li>
-            <li>Road to 99 records & school settings</li>
-          </ul>
         </div>
 
         {/* Typed Security Input */}
-        <div className="space-y-1.5">
-          <label className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+        <div className="space-y-2">
+          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-400">
             Type the school name to confirm:
           </label>
           <input
@@ -163,11 +153,12 @@ export function DeleteConfirmationModal({
           />
         </div>
 
-        <div className="flex items-center justify-end space-x-3 pt-2">
+        {/* Action Buttons */}
+        <div className="flex items-center justify-between pt-2 border-t border-[#2D333B]">
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white bg-[#171B20] rounded-lg transition cursor-pointer"
+            className="px-5 py-2.5 text-xs font-bold text-slate-300 hover:text-white bg-[#2D333B] hover:bg-[#363B47] rounded-lg transition cursor-pointer"
           >
             Cancel
           </button>
@@ -175,7 +166,7 @@ export function DeleteConfirmationModal({
             type="button"
             disabled={!isConfirmed}
             onClick={() => onConfirmDelete(school)}
-            className="px-5 py-2 text-xs font-extrabold bg-red-600 hover:bg-red-700 disabled:opacity-30 text-white rounded-lg shadow-md transition cursor-pointer disabled:cursor-not-allowed"
+            className="px-5 py-2.5 text-xs font-bold bg-[#991B1B] hover:bg-[#DC2626] disabled:opacity-30 text-white rounded-lg shadow-md transition cursor-pointer disabled:cursor-not-allowed"
           >
             Delete Permanently
           </button>
@@ -193,20 +184,46 @@ interface SuccessModalProps {
 export function SuccessToastModal({ message, onClose }: SuccessModalProps) {
   if (!message) return null;
 
+  // Render a cleaner visual state depending on if school was deleted or created
+  const isDeleteSuccess = message.toLowerCase().includes('deleted');
+
   return (
-    <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-[#1C2128] border border-emerald-500/30 rounded-2xl p-6 w-full max-w-sm flex flex-col items-center text-center space-y-4 shadow-2xl">
-        <div className="p-3 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">
-          <CheckCircle2 size={40} />
-        </div>
-        <h3 className="text-base font-bold text-white">{message}</h3>
+    <div className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-[#1C2128] border border-[#2D333B] rounded-2xl p-6 w-full max-w-sm shadow-2xl relative">
+        {/* Top Right Close button */}
         <button
           type="button"
           onClick={onClose}
-          className="w-full bg-[#FAE035] hover:bg-[#E5CD25] text-black font-extrabold text-xs py-2.5 rounded-lg shadow-md transition cursor-pointer"
+          className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg transition cursor-pointer"
         >
-          OK
+          <X size={18} />
         </button>
+
+        <div className="flex flex-col items-center text-center space-y-4 pt-4">
+          <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center border border-emerald-500/20 shadow-inner">
+            <div className="w-14 h-14 rounded-full border-[3.5px] border-emerald-500 flex items-center justify-center bg-emerald-500/10">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="#10B981" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+            </div>
+          </div>
+
+          <h3 className="text-lg font-extrabold text-white tracking-wide">
+            {isDeleteSuccess ? 'School Deleted' : 'Success'}
+          </h3>
+
+          <p className="text-xs text-slate-300 leading-relaxed max-w-xs px-2">
+            {message}
+          </p>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-full bg-[#FAE035] hover:bg-[#E5CD25] text-black font-extrabold text-xs py-2.5 rounded-lg shadow-md transition cursor-pointer"
+          >
+            OK
+          </button>
+        </div>
       </div>
     </div>
   );
