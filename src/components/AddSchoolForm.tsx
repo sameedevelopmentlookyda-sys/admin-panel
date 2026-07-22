@@ -74,6 +74,7 @@ const AddSchoolForm = forwardRef<HTMLDivElement, AddSchoolFormProps>(
             "Backend API call fallback to client state update:",
             err,
           );
+          throw err;
         }
 
         // Format coach names

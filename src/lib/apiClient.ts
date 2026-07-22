@@ -43,7 +43,11 @@ export async function adminFetch<T = any>(endpoint: string, options: RequestInit
 
   const data = await response.json();
   if (!response.ok) {
-    throw new Error(data.message || data.error || `API Request failed with status ${response.status}`);
+    const errorMsg =
+      data.error && typeof data.error === 'object' && 'message' in data.error
+        ? data.error.message
+        : data.message || data.error || `API Request failed with status ${response.status}`;
+    throw new Error(errorMsg);
   }
 
   return data as T;
